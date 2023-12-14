@@ -55,18 +55,13 @@ const App = () => {
 
     const filterCountries = (newFilter) => {
         setactiveFilter(newFilter)
-        console.log('se esta ejecutando')
-        console.log(newFilter)
         if (countries && countries.length > 0) {
-            console.log('aca entro')
             if (newFilter === '') {
-                console.log('aca entro1')
 
                 setshownCountries(listedCountries)
             } else {
                 if (shownCountries.length === 0)  setshownCountries(listedCountries)
 
-                console.log('aca entro2')
                 console.log(
                     shownCountries.filter((country) =>
     country.name
@@ -83,18 +78,12 @@ const App = () => {
 )
                 )
             }
-            console.log('shownCountries')
-            console.log(shownCountries)
-            console.log('shownCountries2')
         }
     }
 
-console.log('activefilter');
-console.log(activeFilter);
-console.log('activefilter2')
 
     return (
-        <div style={{ minHeight: '100vh' }}>
+        <div style={{ minHeight: '100vh', position: 'relative' }}>
             <CssBaseline />
             <AppBar />
             <Grid

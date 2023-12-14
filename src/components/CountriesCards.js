@@ -16,7 +16,7 @@ function CountriesCards({countries }) {
     if (countries && countries.length > 0) {
 
     return (
-        <Grid container display={'flex'} justifyContent={'center'}>
+        <Grid container sx={{display:'flex', justifyContent:'center', marginBottom:'5rem'}}        >
             {countries.map((country) => {
                 return (
                     <Grid
