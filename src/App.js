@@ -27,16 +27,26 @@ const App = () => {
         }
     }, [countries])
 
+    
+
     const [listedCountries, setlistedCountries] = useState([])
+    const [continents, setContinents] = useState([])
     const [shownCountries, setshownCountries] = useState([])
     const [filteredContinent, setfilteredContinent] = useState([])
-    const [filteredCountries, setfilteredCountries] = useState([])
     const [activeFilter, setactiveFilter] = useState('')
+
+    useEffect(() => {
+        filterContinents(continents)
+    }, [continents])
 
     const initializeListedCountries = () => {
         setlistedCountries([])
+        setContinents([])
+        const continentsObj = []
         countries.forEach((country) => {
+            continentsObj.push(country.continents)
             const newcountry = {
+                id: country.latlng.join(''),
                 name: [
                     { lang: 'ENG', text: country.name.common },
                     { lang: 'ESP', text: country.translations['spa'].common },
@@ -51,36 +61,23 @@ const App = () => {
             )
             setshownCountries(listedCountries)
         })
+        console.log('continents');
+        setContinents([...new Set(continentsObj.flat())])
+        console.log(continents)
+        console.log(filteredContinent);
+        console.log(continentsObj);
+        console.log([...new Set(continentsObj.flat())]);
+        console.log('continents2');
+
     }
 
     const filterCountries = (newFilter) => {
-        setactiveFilter(newFilter)
-        if (countries && countries.length > 0) {
-            if (newFilter === '') {
-
-                setshownCountries(listedCountries)
-            } else {
-                if (shownCountries.length === 0)  setshownCountries(listedCountries)
-
-                console.log(
-                    shownCountries.filter((country) =>
-    country.name
-        .filter((text) => text.lang === languaje)
-        .some((text) => text.text.toLowerCase().includes(newFilter.toLowerCase()))
-)
-                )
-
-                setshownCountries(
-                    shownCountries.filter((country) =>
-    country.name
-        .filter((text) => text.lang === languaje)
-        .some((text) => text.text.toLowerCase().includes(newFilter.toLowerCase()))
-)
-                )
-            }
-        }
+        setactiveFilter(newFilter)       
     }
 
+    const filterContinents = (selectedContinents) => {
+        setfilteredContinent(selectedContinents)
+    }
 
     return (
         <div style={{ minHeight: '100vh', position: 'relative' }}>
@@ -94,8 +91,8 @@ const App = () => {
                     marginRight: 'auto',
                     width: '1280px',
                     marginTop: '56px',
-                    display:'flex',
-                    flexDirection:'column',
+                    display: 'flex',
+                    flexDirection: 'column',
 
                     '@media (max-width:1300px)': {
                         width: '992px',
@@ -106,14 +103,20 @@ const App = () => {
                 }}
             >
                 <FilterSection
-                    listedCountries={listedCountries}
-                    filterCountries={filterCountries}
+                    filterCountries={filterCountries} continentList={continents} filterContinents = {filterContinents} 
                 />
-                <CountriesCards countries={listedCountries.filter((country) =>
-    country.name
-        .filter((text) => text.lang === languaje)
-        .some((text) => text.text.toLowerCase().includes(activeFilter.toLowerCase()))
-)} />
+                <CountriesCards
+                    countries={listedCountries
+                        .filter(country =>
+                            country.continents.some(continent => filteredContinent.includes(continent))
+                          )
+                        .filter((country) =>
+                            country.name.some((text) =>
+                                text.lang === languaje &&
+                                text.text.toLowerCase().includes(activeFilter.toLowerCase())
+                            )
+                        )}
+                />
                 <Box></Box>
             </Grid>
             <Footer />

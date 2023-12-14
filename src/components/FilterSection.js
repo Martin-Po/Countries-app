@@ -1,9 +1,7 @@
-import { Box, Typography } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { Box } from '@mui/material'
 import { CountryFilter, RegionFilter } from './Filters'
 
-function FilterSection({listedCountries, filterCountries}) {
-    const languaje = useSelector((state) => state.languaje)
+function FilterSection({ filterCountries, continentList, filterContinents}) {
 
     return (
         <Box
@@ -21,8 +19,8 @@ function FilterSection({listedCountries, filterCountries}) {
                 },
             }}
         >
-                <CountryFilter listedCountries = {listedCountries}  filterCountries={filterCountries}/>       
-                <RegionFilter />
+                <CountryFilter filterCountries={filterCountries}/>       
+                <RegionFilter continentList = {continentList} filterContinents = {filterContinents} />
         </Box>
     )
 }

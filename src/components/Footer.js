@@ -9,7 +9,9 @@ function Footer() {
             sx={{
                 backgroundColor: 'primary.main',
                 margin: 'auto',
-                position:'absolute', bottom:'0', width:'100%'
+                position: 'absolute',//Container must have POSITION: RELATIVE
+                bottom: '0',
+                width: '100%',
             }}
         >
             <Box
