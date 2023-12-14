@@ -33,7 +33,7 @@ export default function RegionFilter({ continentList, filterContinents }) {
         const {
             target: { value },
         } = event
-      
+
         filterContinents(value)
         setCountryName(
             // On autofill we get a stringified value.
@@ -42,8 +42,28 @@ export default function RegionFilter({ continentList, filterContinents }) {
     }
 
     return (
-        <div>
-            <FormControl sx={{ m: 1, width: 300 }}>
+        <Box
+            sx={{
+                width: {
+                    xs: '100%',
+                    sm: 'auto',
+                },
+                padding: {
+                    xs: '0.5rem',
+                    sm: 'auto',
+                },
+            }}
+        >
+            <FormControl
+                sx={{
+                    m: 1,
+                    width: {
+                        xs: '100%',
+                        sm: '300px',
+                        margin: '0',
+                    },
+                }}
+            >
                 <InputLabel id="demo-multiple-checkbox-label">
                     {languaje === 'ESP'
                         ? 'Filtra por continente'
@@ -63,7 +83,7 @@ export default function RegionFilter({ continentList, filterContinents }) {
                         ? continentList.sort().map((name) => (
                               <MenuItem key={name} value={name}>
                                   <Checkbox
-                                  checked={countryName.indexOf(name) > -1}
+                                      checked={countryName.indexOf(name) > -1}
                                   />
                                   <ListItemText primary={name} />
                               </MenuItem>
@@ -71,7 +91,7 @@ export default function RegionFilter({ continentList, filterContinents }) {
                         : 'a'}
                 </Select>
             </FormControl>
-        </div>
+        </Box>
     )
 }
 
@@ -86,8 +106,24 @@ const CountryFilter = ({ filterCountries }) => {
     }
 
     return (
-        <Box>
+        <Box
+            sx={{
+                width: {
+                    xs: '100%',
+                    sm: 'auto',
+                },
+                marginBottom: {
+                    xs: '0.5rem',
+                    sm: 'auto',
+                },
+                padding: {
+                    xs: '0.5rem',
+                    sm: 'auto',
+                },
+            }}
+        >
             <TextField
+                fullWidth
                 value={filter}
                 InputProps={{
                     startAdornment: (
