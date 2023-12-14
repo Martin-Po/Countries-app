@@ -34,6 +34,7 @@ const App = () => {
     const [shownCountries, setshownCountries] = useState([])
     const [filteredContinent, setfilteredContinent] = useState([])
     const [activeFilter, setactiveFilter] = useState('')
+    const [loaded, setloaded] = useState(false)
 
     useEffect(() => {
         filterContinents(continents)
@@ -61,6 +62,10 @@ const App = () => {
             )
             setshownCountries(listedCountries)
         })
+        setTimeout(() => {
+            setloaded(true)        
+            
+        }, 2000);
         console.log('continents');
         setContinents([...new Set(continentsObj.flat())])
         console.log(continents)
@@ -105,7 +110,7 @@ const App = () => {
                 <FilterSection
                     filterCountries={filterCountries} continentList={continents} filterContinents = {filterContinents} 
                 />
-                <CountriesCards
+                <CountriesCards loaded = {loaded}
                     countries={listedCountries
                         .filter(country =>
                             country.continents.some(continent => filteredContinent.includes(continent))

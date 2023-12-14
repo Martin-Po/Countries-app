@@ -7,7 +7,7 @@ import CardMedia from '@mui/material/CardMedia'
 import { CardActionArea } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 
-function CountriesCards({ countries }) {
+function CountriesCards({ loaded, countries }) {
     const languaje = useSelector((state) => state.languaje)
     if (countries && countries.length > 0) {
         return (
@@ -97,7 +97,26 @@ function CountriesCards({ countries }) {
                 })}
             </Grid>
         )
-    } else {
+    } 
+    
+    else if(loaded) 
+    {
+        return(
+            <Box
+            container
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                marginBottom: '5rem',
+            }}
+        >
+        <Typography sx={{margin:'1.5rem', fontWeight:'700', fontSize:'1.5rem'}} >{languaje === 'ESP' ? 'Ningún país coincide con tu búsqueda' : 'No country matches your query'}</Typography>
+        </Box>)
+
+    }
+
+
+    else {
         const skeletonItems = []
 
         for (let x = 0; x < 6; x++) {
