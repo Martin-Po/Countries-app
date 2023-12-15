@@ -20,7 +20,6 @@ const App = () => {
     // Fetch countries from the Redux store
     const countries = useSelector((state) => state.countries)
 
-    console.log(countries)
     useEffect(() => {
         if (countries && countries.length > 0) {
             initializeListedCountries()
@@ -66,13 +65,8 @@ const App = () => {
             setloaded(true)        
             
         }, 2000);
-        console.log('continents');
         setContinents([...new Set(continentsObj.flat())])
-        console.log(continents)
-        console.log(filteredContinent);
-        console.log(continentsObj);
-        console.log([...new Set(continentsObj.flat())]);
-        console.log('continents2');
+       
 
     }
 
